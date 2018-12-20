@@ -1,0 +1,42 @@
+.cart{
+	margin: 0px auto;
+}
+.cart > input{
+	width: 80%;
+	margin-bottom: 10px;
+}
+.imageLine{
+	width: 
+	float: left;
+}
+.myCart{
+	margin: 5px auto;
+	border: 1px solid #80808066;
+	background-color: white;
+	width: 100%;
+}
+.myCart > p{
+	float: left;
+	margin: 0px 5%;
+}
+.row1{
+	width: 20%;
+}
+.col1{
+	width: 20%;
+	padding: 5px;
+}
+.col2{
+	padding-left: 25px;
+}
+.col4 > input{
+	width: 30%;
+}
+.info-customer > input{
+	width: 100%;
+}
+.info-customer{
+	background-color: white;
+	border: 1px solid #80808066;
+	padding: 5px;
+}

@@ -1,0 +1,86 @@
+.clear-fix{
+	clear: both;
+}
+*{
+	box-sizing: border-box;
+}
+.header{
+	height: auto;
+}
+img{
+	width: 100%;
+}
+.menu{
+	padding-top: 5px;
+	margin-bottom: 0px;
+	background-color: #70e9e8;
+}
+@media screen and (min-width: 1024px){
+	.menu{
+		padding-left: 22%;
+		padding-right: 22%;
+	}
+}
+.menu-item{
+	float: left;
+	width: 20%;
+	text-align: center;
+
+}
+
+.body {
+	max-width: 1024px;
+	min-width: 360px;
+	margin: 0px auto;
+	background: #FBFBFB;
+}
+.arrow{
+	width: 40%;
+}
+.slide-container image{
+	width: 100%;
+}
+.dot-box{
+	text-align: center;
+}
+.image2, .image3{
+	display: none;
+}
+.dot{
+	cursor:pointer;
+	height: 12px;
+	width: 12px;
+	border-radius: 50%;
+	display: inline-block;
+	transition: background-color 0.6s ease;
+	background-color: #bbb;
+}
+.active{
+	background-color: red;
+}
+
+#next{
+ text-transform: uppercase;
+ position: relative;
+ float: right;
+ bottom: 50px;
+ }
+#prev{
+ text-transform: uppercase;
+ position: relative;
+ float: left;
+ bottom: 50px;
+ }
+ ul.dot-box{
+ 	margin: -25px 0px 10px 0px;
+ }
+
+
+ .all-car{
+ 	float: left;
+
+ }
+ .footer{
+ 	background-color: #70e9e866;
+ 	padding-left: 10px;
+ }

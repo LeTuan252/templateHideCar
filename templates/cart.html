@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8">
+      <title>Hide Super Car</title>
+      <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.min.css" />
+      <link rel="stylesheet" type="text/css" href="../static/css/style2.css" />
+      <link rel="stylesheet" type="text/css" href="../static/css/cart.css" />
+      
+      <script type="text/javascript" src="../static/js/jquery-3.3.1.min.js" ></script>
+      
+      <script type="text/javascript" src="../static/bootstrap/js/bootstrap.min.js" ></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+      <script type="text/javascript" src="../static/js/cart.js" ></script>
+   </head>
+   <body ng-app="cart" ng-controller="cartController" >
+      <header ng-include="'header.html'"></header>
+      <div ng-include="'_menu.html'"></div>
+      <div class="body">
+         <div class="col-md-8 cart">
+            <p>Your Cart:</p>
+            <table ng-repeat="i in cartLine.line" class="myCart">
+
+               <tr>
+                  <td class="col1"><img src="{{i.link}}" class="imageLine"></td>
+                  <td class="row1 col2">{{i.name}}</td>
+                  <td class="row1 col3">{{i.price}}$</td>
+                  <td class="row1 col4"><input type="text" ng-model="quantity" ></td>
+                 
+               </tr>
+               <tr>
+                  <td>Total: <span>{{gettotal(quantity, i)}} {{i.kq}}</span></td>
+               </tr>
+            </table>
+            <p>Total: <span> {{total()}}</span></p>
+            <p>Information</p>
+            <form class="info-customer">
+               <p>Full name: </p><input type="text" name="name" placeholder="name">
+               <p>Phone number: </p><input type="text" name="phone" placeholder="phone">
+               <p>Address: </p><input type="text" name="address" placeholder="address">
+               <br>
+               <input type="submit" name="submit" value="Send">
+            </form>
+            <a href="#">Continue buying</a>
+         </div>
+
+
+         <div class="clear-fix"></div>
+         <div>
+            <div ng-include="'footer.html'"></div>
+         </div>
+         
+      </div>
+       
+   </body>
+</html>

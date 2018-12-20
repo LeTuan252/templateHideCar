@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8">
+      <title>Hide Super Car</title>
+      <link rel="stylesheet" type="text/css" href="../static/css/style2.css" />
+      <link rel="stylesheet" type="text/css" href="../static/css/index.css" />
+      <script type="text/javascript" src="../static/js/jquery-3.3.1.min.js" ></script>
+      <script type="text/javascript" src="../static/js/index.js" ></script> 
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.min.css" />
+      
+      <!-- <script type="text/javascript" src="../static/js/angular.min.js"></script> -->
+      <script type="text/javascript" src="../static/bootstrap/js/bootstrap.min.js" ></script>
+      <script type="text/javascript" src="../static/js/ui-bootstrap-tpls-2.5.0.min.js"></script>
+   </head>
+   <body ng-app="myApp" ng-controller="customersCtrl">
+      <header ng-include="'header.html'"></header>
+      <div ng-include="'_menu.html'"></div>
+      <div class="body">
+      
+         <div class="slide-container">
+            
+         	<img th:src="@{/images/banner1.jpg}" src="../static/images/banner1.jpg" stt="0" class="image1 slide-image" />
+            <img th:src="@{/images/banner2.jpg}" src="../static/images/banner2.jpg" stt="1" class="image2 slide-image" />
+            <img th:src="@{/images/banner3.jpg}" src="../static/images/banner3.jpg" stt="2" class="image3 slide-image" />
+            <div id ="next"><img src="../static/images/icon/arrow-right.png" class="arrow"></div>
+            <div id = "prev"><img src="../static/images/icon/arrow-left.png" class="arrow"></div>
+            <ul class="dot-box">
+              <li class="dot active" ></li> 
+              <li class="dot" ></li> 
+              <li class="dot" ></li> 
+            </ul> 
+            
+         </div>
+         <div class="clear-fix"></div>
+         <div class="col-md-8 col-sm-8 col-12 car">
+            <div>Super Car</div>
+            <div class="col-md-6 col-sm-6 col-6 car">
+               <div class="one-car" ng-repeat="i in superCar.superCar1" >
+                  <img  src="{{i.link}}"  />
+                  <ul>
+                     <li><b>Label: </b><span>{{i.name}}</span></li>
+                     <li><b>Price: </b><span>{{i.price}}$</span></li>
+                     <li ng-click="open()"> Details ... </li>
+                  </ul>
+               </div> 
+            </div>
+            <div class="col-md-6 col-sm-6 col-6 car">
+               <div class="one-car" ng-repeat="i in superCar.superCar2" >
+                  <img  src="{{i.link}}"  />
+                  <ul>
+                     <li><b>Label: </b><span>{{i.name}}</span></li>
+                     <li><b>Price: </b><span>{{i.price}}$</span></li>
+                     <li ng-click="open()">Details ...</li>
+                  </ul>
+               </div> 
+            </div>
+
+            <div>Wedding Car</div>  
+            <div class="col-md-6 col-sm-6 col-6 car">
+               <div class="one-car" ng-repeat="i in weddingCar.weddingCar1" >
+                  <img  src="{{i.link}}"  />
+                  <ul>
+                     <li><b>Label: </b><span>{{i.name}}</span></li>
+                     <li><b>Price: </b><span>{{i.price}}$</span></li>
+                     <li>Details ...</li>
+                  </ul>
+                  
+               </div> 
+            </div>
+            <div class="col-md-6 col-sm-6 col-6 car">
+               <div class="one-car" ng-repeat="i in weddingCar.weddingCar2" >
+                  <img  src="{{i.link}}"  />
+                  <ul>
+                     <li><b>Label: </b><span>{{i.name}}</span></li>
+                     <li><b>Price: </b><span>{{i.price}}$</span></li>
+                     <li>Details ...</li>
+                  </ul>
+                  
+               </div> 
+            </div>
+         </div>   
+         <div class="col-md-4 col-sm-4 car">    
+            <p>Search Car</p>
+            <div class="book-car">
+               
+               <div class="select">
+                  <select>
+                     <option>Wedding Car</option>
+                     <option>Travel</option>
+                     <option>Hide car by hour</option>
+                     <option>Hide car by month</option>
+                  </select>
+               </div>
+               <div class="select">
+                  <select>
+                     <option>Label</option>
+                     <option>BMW</option>
+                     <option>Lexus</option>
+                     <option>Roll Royce</option>
+                  </select>
+               </div>
+               <div class="select">
+                  <select>
+                     <option>Seats</option>
+                     <option>4 seats</option>
+                     <option>7 seats</option>
+                     <option>16 seats</option>
+                     <option>24 seats</option>
+                  </select>
+               </div>
+               
+               <input type="submit" name="Send" value="Search">
+            </div>
+         </div>
+
+         <div class="clear-fix" ></div>
+
+         <div ng-include="'footer.html'"></div>
+      </div>
+   </body>
+</html>
