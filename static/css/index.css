@@ -1,5 +1,9 @@
 .car{
+<<<<<<< HEAD
 	float: left;
+=======
+	float: right;
+>>>>>>> 8f166f1a5b61f409e91561b3796d362373e15f14
 	padding: 5px !important;
 	position: fixed;
 }
@@ -11,17 +15,18 @@
 	border: 1px solid #80808066;
 	background-color: white;
 	margin-bottom: 15px;
+	padding: 5px;
 }
-.book-car{
+.search-car{
 	border: 1px solid #80808066;
 	background-color: white;
-	padding-left: 5px;
+	padding-left: 2%;
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
-.book-car > input{
+.search-car > input{
 	margin-bottom: 10px;
-	width: 95%;
+	width: 98%;
 }
 .car > p{
 	margin-bottom: 0px;
@@ -32,10 +37,30 @@
 	padding-top: 0.5rem;
 }
 .select{
-	width: 95%;
+	width: 98%;
 	margin: 10px 0px;
 }
 select{
 	width: 100%;
 }
-
+.detail-car{
+	float: right; 
+}
+.groupCar{
+	font-size: 2rem;
+}
+.one-car > ul > li {
+	width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.one-car > ul > li:first-child {
+	font-weight: bold;
+	font-size: 1.2rem;
+}
+@media screen and (max-width: 1024px){
+	.one-car > ul {
+		padding-left: 0px;
+	}
+}
