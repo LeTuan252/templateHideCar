@@ -33,7 +33,11 @@
 	width: 30%;
 }
 .info-customer > input{
+	margin-bottom: 10px;
 	width: 100%;
+}
+.info-customer > p{
+	margin-bottom: 0px;
 }
 .info-customer{
 	background-color: white;
