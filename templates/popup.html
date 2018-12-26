@@ -1,1 +1,54 @@
-<div class="test">aaa</div>
+<span class="background-popup"></span>
+<div class="popup col-sm-12 col-12 col-md-6">
+	<img src="../static/images/icon/close.png" ng-click="hidePopup()" class="hide-popup" />
+	<div class="clear-fix"></div>
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+		<ol class="carousel-indicators">
+			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			<li data-target="#myCarousel" data-slide-to="1"></li>
+			<li data-target="#myCarousel" data-slide-to="2"></li>
+		</ol>
+		<div class="carousel-inner">
+			<div class="carousel-item active">
+				<img src="{{itemCar.imgDetail1}}" class="d-block w-80" />
+			</div>
+			<div class="carousel-item">
+				<img src="{{itemCar.imgDetail2}}" class="d-block w-80" />
+			</div>
+			<div class="carousel-item">
+				<img src="{{itemCar.imgDetail3}}" class="d-block w-80" />
+			</div>
+		</div>
+
+		<a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			<span class="sr-only">Prev</span>
+		</a>
+
+		<a href="#myCarousel" class="carousel-control-next" role="button" data-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
+		</a>
+	</div>
+	 <!--  <span ng-click="thayDoi()"> THAY DOI</span> -->
+
+	<table class="table">
+			<tr>
+				<td class="popup-col1">Name</td>
+				<td>{{itemCar.name}}</td>
+			</tr>
+			<tr>
+				<td class="popup-col1">Size</td>
+				<td>{{itemCar.size}}</td>
+			</tr>
+			<tr>
+				<td class="popup-col1">Seat</td>
+				<td>{{itemCar.seat}} seats</td>
+			</tr>
+			<tr>
+				<td class="popup-col1">Color</td>
+				<td>{{itemCar.color}}</td>
+			</tr>
+	</table>
+	<button >Hide this car</button>
+</div>
