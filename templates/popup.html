@@ -1,5 +1,5 @@
 <span class="background-popup"></span>
-<div class="popup col-sm-12 col-12 col-md-6">
+<div class="popup col-sm-11 col-12 col-md-6">
 	<img src="../static/images/icon/close.png" ng-click="hidePopup()" class="hide-popup" />
 	<div class="clear-fix"></div>
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -38,8 +38,8 @@
 				<td>{{itemCar.name}}</td>
 			</tr>
 			<tr>
-				<td class="popup-col1">Size</td>
-				<td>{{itemCar.size}}</td>
+				<td class="popup-col1">Price</td>
+				<td>{{itemCar.price}}$</td>
 			</tr>
 			<tr>
 				<td class="popup-col1">Seat</td>
@@ -49,6 +49,15 @@
 				<td class="popup-col1">Color</td>
 				<td>{{itemCar.color}}</td>
 			</tr>
+			<tr>
+				<td class="popup-col1">Status</td>
+				<td>{{itemCar.status}}</td>
+			</tr>
 	</table>
-	<button >Hide this car</button>
+	<button ng-click="book()">Hire this car</button>
+	<button ng-click="openComment()" class="btnShowCmt">Show Comment</button>
+	<div ng-repeat="cmt in comment" class="allComment">
+		<p><b>{{cmt.username}} : </b><span>{{cmt.content}}</span></p>
+	</div>
+
 </div>

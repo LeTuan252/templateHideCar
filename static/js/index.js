@@ -1,121 +1,105 @@
 $(document).ready(function(){
-	var stt = 0;
-	startImg = parseInt($("img.image1").attr("stt"));
-	endImg = parseInt($("img.image3").attr("stt"));
-	$(".slide-container > img").each(function(){
-		if ($(this).is(":visible")){
-			stt = parseInt($(this).attr("stt"));
-		}
-	});
+	$('#bannerCarousel').carousel({
+	      interval: 4000,
+	      wrap: true,
+	      keyboard: true
+	 });
+	var app = angular.module('myApp', []);
+	app.controller('customersCtrl', function($scope, $http, $window ){
 
-	$("#next").click(function(){
-		if(next == endImg){
-			stt = startImg - 1;
-		}
-		next = ++stt;
-		$("img.slide-image").hide();
-		$("img.slide-image").eq(next).show();
-		$("li.dot").removeClass("active");
-		$("li.dot").eq(next).addClass("active");
-
-	})
-
-	$("#prev").click(function(){
-		if(stt == 0){
-			stt = endImg + 1;
-		}
-		prev = --stt;
-		$("img.slide-image").hide();
-		$("img.slide-image").eq(prev).show();
-		$("li.dot").removeClass("active");
-		$("li.dot").eq(prev).addClass("active");
-	})
-	setInterval(function(){
-		$("#next").click();},2000
-	);
-
-	var app = angular.module('myApp', ['ui.bootstrap']);
-	app.controller('customersCtrl', function($scope, $uibModal){
-		$scope.superCar = {
-			superCar1: [
-				{link: '../static/images/car/car1.jpg', name: 'car1', price: '1000', size: '3.660 x 1.600 x 1.520 mm', seat: '4', color: 'white',
-				imgDetail1: '../static/images/car/car1-inside1.jpg', imgDetail2: '../static/images/car/car1-inside2.jpg',
-				imgDetail3: '../static/images/car/car1-inside3.jpg'},
-				{link: '../static/images/car/car2.jpg', name: 'car2', price: '2000', size: '3.660 x 1.600 x 1.520 mm', seat: '7', color: 'red',
-				imgDetail1: '../static/images/car/car1-inside1.jpg', imgDetail2: '../static/images/car/car1-inside2.jpg',
-				imgDetail3: '../static/images/car/car1-inside3.jpg'},
-				
-				],
-			superCar2: [
-				{link: '../static/images/car/car3.jpg', name: 'car3', price: '400', size: '3.660 x 1.600 x 1.520 mm', seat: '4', color: 'red',
-				imgDetail1: '../static/images/car/car1-inside1.jpg', imgDetail2: '../static/images/car/car1-inside2.jpg',
-				imgDetail3: '../static/images/car/car1-inside3.jpg'},
-				{link: '../static/images/car/car4.jpg', name: 'car4', price: '500', size: '3.660 x 1.600 x 1.520 mm', seat: '7', color: 'yellow',
-				imgDetail1: '../static/images/car/car1-inside1.jpg', imgDetail2: '../static/images/car/car1-inside2.jpg',
-				imgDetail3: '../static/images/car/car1-inside3.jpg'}
-				],
-			superCar3: [
-				{link: '../static/images/car/car5.jpg', name: 'car5', price: '700', size: '3.660 x 1.600 x 1.520 mm', seat: '7', color: 'black',
-				imgDetail1: '../static/images/car/car1-inside1.jpg', imgDetail2: '../static/images/car/car1-inside2.jpg',
-				imgDetail3: '../static/images/car/car1-inside3.jpg'},
-				{link: '../static/images/car/car6.jpg', name: 'car6', price: '800', size: '3.660 x 1.600 x 1.520 mm', seat: '4', color: 'black',
-				imgDetail1: '../static/images/car/car1-inside1.jpg', imgDetail2: '../static/images/car/car1-inside2.jpg',
-				imgDetail3: '../static/images/car/car1-inside3.jpg'}
-			]
-		};
-		$scope.weddingCar = {
-			weddingCar1: [
-				{link: '../static/images/car/weddingCar/car1.jpg', name: 'Roll Royce', price: '1000', size: '3.660 x 1.600 x 1.520 mm', seat: '9'},
-				{link: '../static/images/car/weddingCar/car2.jpg', name: 'BMV', price: '2000', size: '3.660 x 1.600 x 1.520 mm', seat: '2'},
-				
-				],
-			weddingCar2: [
-				{link: '../static/images/car/weddingCar/car3.jpg', name: 'Lexus', price: '400', size: '3.660 x 1.600 x 1.520 mm', seat: '5'},
-				{link: '../static/images/car/weddingCar/car4.jpg', name: 'Mazda', price: '500', size: '3.660 x 1.600 x 1.520 mm', seat: '2'}
-				],
-			weddingCar3: [
-				{link: '../static/images/car/weddingCar/car5.jpg', name: 'VinFast', price: '700', size: '3.660 x 1.600 x 1.520 mm', seat: '11'},
-				{link: '../static/images/car/weddingCar/car6.jpg', name: 'KIA', price: '800', size: '3.660 x 1.600 x 1.520 mm', seat: '2'}
-			]
-		};
-
+		$http.get("http://localhost:8080/get-list-product").then(function(response){
+			$scope.superCar = response.data;
+		});
+		
 		$scope.open = function(i){
 			$scope.showPopupModal = true;
-			$scope.selectedItem = i;
+			$http.post("http://localhost:8080/get-one/" + i.id).then(function(response){
+	      		$scope.selectedItem = Object.assign(i, response.data);
+	      	});
 		}
+
+		$scope.carName = '';
+		$scope.search = function(){
+			var data = {'name': $scope.carName, 'seat' : $scope.seat, 'color' : $scope.color, 'priceFrom' : $scope.priceFrom,
+			'priceTo' : $scope.priceTo}
+			$http.post("https://5c2c260dad36d90014f3425d.mockapi.io/abcxyz/search", data).then(function(){
+				$window.open('../templates/search.html');	
+			})
+			
+		}
+
+		$scope.searchPrice = function(){
+			var data = {'priceFrom': $scope.priceFrom, 'priceTo': $scope.priceTo}
+			$http.post("http://localhost:8080/get-by-price", data)
+		}
+		$scope.chooseLabel = [
+			{value: '', label: 'All'},
+			{value: 'honda', label: 'Honda'},
+			{value: 'ford', label: 'Ford'},
+			{value: 'bmw', label: 'BMW'},
+			{value: 'kia', label: 'KIA'},
+		]
+		$scope.seat = '';
+		$scope.chooseSeat = [
+			{value: '', label: 'All'},
+			{value: '4', label: '4 seats'},
+			{value: '12', label: '12 seats'},
+			{value: '24', label: '24 seats'},
+		]
+		$scope.color = '';
+		$scope.chooseColor = [
+			{value: '', label: 'All'},
+			{value: 'black', label: 'Black'},
+			{value: 'gray', label: 'Gray'},
+			{value: 'red', label: 'Red'},
+			{value: 'blue', label: 'Blue'},
+		]
 	})
 	
-	app.directive('popupModal', function() {
+	app.directive('popupModal', function($http) {
 	  	return {
 	  		restrict: 'EA',
 	  		scope: {
   				showPopupModal:'=',
   				itemCar:'='
 	  		},
-	    	// template: 
-	    	// '<div style="width: 100%; height:100%; position: fixed; top:0; left:0; background: rgba(166,166,166,0.5); z-index: 10000;"> <span ng-bind="name">'+
-	    	// '</span> <span ng-click="hidePopup()"> dau X</span>  {{itemCar}} <span ng-click="thayDoi()"> THAY DOI</span> </div>',
 	    	templateUrl: '../templates/popup.html',
-	    	link: function(scope, element, attrs) {
+	    	link: function(scope, element, attrs, http) {
 		      	scope.hidePopup = function(){
 	      			scope.showPopupModal = false;
-		      	}
-		     	scope.thayDoi = function(){
-		      		scope.itemCar.name = 22222222222;
-		      		scope.itemCar.price = 10000000000;
 		      	}
 		      	$(document).on("keydown", function(e){
 	      			if($(element).is(":visible") && e.keyCode === 27){
 	      				scope.showPopupModal = false;
+	      				$(".allComment").hide();
 	      				scope.$apply();
 	      			}
 		      	})
 		      	$(".background-popup").on("click", function(e){
 		      		e.preventDefault();
-						scope.showPopupModal = false;
-	      				scope.$apply();
+					scope.showPopupModal = false;
+					$(".allComment").hide();
+      				scope.$apply();
 		      		
 		      	})
+		      	scope.book = function(){
+		      		var data = {"name" : scope.itemCar.name, "link" : scope.itemCar.imgDetail1, "price" : scope.itemCar.price,
+		      		 "amountLine" : scope.itemCar.price}
+		      		$http.post("https://5c2c260dad36d90014f3425d.mockapi.io/abcxyz/order", data).then(function(){
+		      			alert("This car is added to your cart !");
+		      		})
+		      	}
+		      	scope.openComment = function(){
+		      		$http.get("https://5c35a25fae60ba0014da4305.mockapi.io/car/"  + scope.itemCar.id + "/comment/")
+		      		.then(function(comment){
+		      			
+			      		scope.comment =[];
+			      		for(i = 0; i < comment.data.length; i++){
+			      			cmt = comment.data[i];
+			      			scope.comment.push(cmt);
+			      		}
+			      	})
+		      	}
 		    }
 	 	}
 	});

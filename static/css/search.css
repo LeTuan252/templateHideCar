@@ -1,0 +1,46 @@
+.one-car{
+	float: left;
+	padding: 2%;
+}
+.border{
+	padding: 5px;
+}
+.searchBar{
+	margin-left: 10%;
+	margin-top: 20px;
+}
+.searchBar > input{
+	width: 100%;
+}
+.filterCar{
+	float: left;
+}
+.select{
+	margin-top: 5px;
+}
+.select > select {
+	width: 100%;
+}
+.resultFilter{
+	float: left;
+}
+.border > ul > li {
+	width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.border > ul > li:first-child {
+	font-weight: bold;
+	font-size: 1.2rem;
+}
+.detail-car{
+	float: right;
+}
+.priceTo > input {
+	margin-left: 20px;
+	width: 80%;
+}
+.priceFrom > input {
+	width: 80%;
+}

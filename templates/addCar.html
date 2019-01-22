@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8">
+      <title>New Car | Hire Super Car</title>
+      <link rel="stylesheet" type="text/css" href="../static/css/style2.css" />
+      <link rel="stylesheet" type="text/css" href="../static/css/addCar.css" />
+      <script type="text/javascript" src="../static/js/jquery-3.3.1.min.js" ></script>
+      <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.min.css" />
+      <script type="text/javascript" src="../static/bootstrap/js/bootstrap.min.js" ></script>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+      <script type="text/javascript" src="../static/js/addCar.js" ></script>
+   </head>
+   <!-- http://embed.plnkr.co/26fh0P/ -->
+   <body ng-app="addCar" ng-controller="addCarCtrl">
+      <header ng-include="'header.html'"></header>
+      <div ng-include="'_menu.html'"></div>
+      <div class="body body-add-car">
+         
+         <div class="col-md-9 col-sm-10 col-11">
+            <p class="new-car-title">Add a new Car</div> 
+            <form class="formNewCar" name="formNewCar">
+               <div><span class="newCarName">Name*: </span></div><input type="text" name="name" ng-model="newCar.name" required>
+                  <p class="error-msg" ng-show="formNewCar.name.$touched && formNewCar.name.$invalid">The name is required.</p>
+               
+               <div><span>Color*  : </span></div><input type="text" name="color" ng-model="newCar.color" required>
+                  <p class="error-msg" ng-show="formNewCar.color.$touched && formNewCar.color.$invalid">The color is required.</p>
+               
+               <div><span >Km: </span></div><input type="number" name="km" min="0" ng-pattern="/^[0-9]+$/" ng-model="newCar.km">
+                  <p class="error-msg"  ng-show="formNewCar.km.$dirty && formNewCar.km.$invalid">The km must be a number.</p>
+               
+               <div><span>Price*  : </span></div><input type="number" name="price" min="0" ng-pattern="/^[0-9]+$/" ng-model="newCar.price" required>
+                  <p class="error-msg"  ng-show="formNewCar.price.$dirty && formNewCar.price.$invalid">The price must be a number.</p>
+                  <p class="error-msg"  ng-show="formNewCar.price.$touched && formNewCar.price.$error.required">The price is required.</p>
+               
+               <div><span>Seat*: </span></div><select ng-model="newCar.seat" ng-options="seat.value as seat.label for seat in chooseSeat" required></select>
+                  <p class="error-msg" ng-show="formNewCar.seat.$touched && formNewCar.seat.$error.required">The Seat is required.</p>
+               
+               <div><span>Image: </span><span image-upload new-car="infoCar" ></span>
+               <input type="submit" name="submit" value="Submit" id="submitNewCar" ng-click="submitNewCar()">
+            </form>           
+         </div>
+      <div class="clear-fix" ></div>   
+      <div ng-include="'footer.html'"></div>
+      </div>
+       
+   </body>
+</html>

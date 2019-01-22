@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="UTF-8">
+      <title>Search | Hire Super Car</title>
+      <link rel="stylesheet" type="text/css" href="../static/css/style2.css" />
+      <link rel="stylesheet" type="text/css" href="../static/css/search.css" />
+      <script type="text/javascript" src="../static/js/jquery-3.3.1.min.js" ></script>
+      <script type="text/javascript" src="../static/js/search.js" ></script> 
+      <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.min.css" />
+      <script type="text/javascript" src="../static/js/angular.min.js"></script>
+      <script type="text/javascript" src="../static/bootstrap/js/bootstrap.min.js" ></script>
+      <link rel="stylesheet" type="text/css" href="../static/css/popup.css" />
+      <script data-require="angular-ui-bootstrap@0.3.0" data-semver="0.3.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.min.js"></script>   
+   </head>
+   <body ng-app="search" ng-controller="searchCtrl">
+      <header ng-include="'header.html'"></header>
+      <div ng-include="'_menu.html'"></div>
+      <div class="body">
+         <popup-modal ng-show="showPopupModal" show-popup-modal="showPopupModal" item-car="selectedItem"></popup-modal>
+         <div class="col-md-10 col-sm-10 col-10 searchBar">
+            <input type="text" name="name" placeholder="name..." ng-model="search.name">
+         </div>
+
+         <div class="col-md-4 filterCar">
+               <div class="select">
+                  Label:
+                  <!-- <select ng-model="search.seat" ng-options="seat.value as seat.label for seat in chooseLabel">
+                  </select> -->
+               </div>
+               <div class="select">
+                  Seats:
+                  <select ng-model="search.seat" ng-options="seat.value as seat.label for seat in chooseSeat">
+                  </select>
+               </div>
+               <div class="select">
+                  Color:
+                  <select ng-model="search.color" ng-options="color.value as color.label for color in chooseColor">
+                  </select>
+               </div>
+               <div>
+                  Price:
+                  <p class="priceFrom"> 
+                     From <input type="number" name="priceFrom" ng-model="priceFrom">
+                  </p>
+                  <p class="priceTo">   
+                     To <input type="number" name="priceTo" ng-model="priceTo">
+                  </p>
+                  <span>{{searchPrice()}}</span>
+               </div>
+            <div class="clear-fix"></div>
+         </div>
+         <div class="col-md-8 resultFilter">            
+            <div class="one-car col-md-6 col-sm-6 col-6" ng-repeat="i in searchCar | filter : search" >
+               <div class="border">
+                  <img src="{{i.image}}" ng-click="open(i)" />
+                  <ul>
+                     <li><span>{{i.name}}</span></li>
+                     <li><span>{{i.price}}$/day</span></li> 
+                  </ul>
+                  <span ng-click="open(i)" class="detail-car"><i>Details ... </i> </span>
+                  <div class="clear-fix"></div>
+               </div>
+            </div>
+            <div class="clear-fix"></div>
+         </div>
+         <div class="clear-fix"></div>   
+      <div ng-include="'footer.html'"></div>
+      </div>         
+   </body>

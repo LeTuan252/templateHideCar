@@ -14,20 +14,27 @@ img{
 	padding-top: 5px;
 	margin-bottom: 0px;
 	background-color: #70e9e8;
+	font-size: 1.25rem;
 }
-@media screen and (min-width: 1024px){
+@media screen and (min-width: 1150px){
 	.menu{
-		padding-left: 22%;
-		padding-right: 22%;
+		padding-left: 22% !important;
+		padding-right: 22% !important;
 	}
 }
+
 .menu-item{
 	float: left;
-	width: 20%;
-	text-align: center;
+	width: 30%;
 
 }
-
+.home-item{
+	width: 15%;
+	margin-left: 5%;
+}
+.menu-ul{
+	width: 100%;
+}
 .body {
 	max-width: 1024px;
 	min-width: 360px;
@@ -85,3 +92,8 @@ img{
  	padding-left: 10px;
 
  }
+@media screen and (max-width: 768px){
+	ul{
+		padding-left: 5px;
+	}
+}

@@ -2,15 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
    <head>
       <meta charset="UTF-8">
-      <title>Hide Super Car</title>
+      <title>Order | Hire Super Car</title>
       <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.min.css" />
       <link rel="stylesheet" type="text/css" href="../static/css/style2.css" />
       <link rel="stylesheet" type="text/css" href="../static/css/cart.css" />
-      
+
       <script type="text/javascript" src="../static/js/jquery-3.3.1.min.js" ></script>
-      
+      <script type="text/javascript" src="../static/js/angular.min.js"></script>
       <script type="text/javascript" src="../static/bootstrap/js/bootstrap.min.js" ></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
       <script type="text/javascript" src="../static/js/cart.js" ></script>
    </head>
    <body ng-app="cart" ng-controller="cartController" >
@@ -19,31 +18,60 @@
       <div class="body">
          <div class="col-md-8 cart">
             <p>Your Cart:</p>
-            <table ng-repeat="i in cartLine.line" class="myCart">
-
+            <p>Information:</p>
+            <form class="info-customer" name="infoCustomer">
+               <p>Full name*: </p><input type="text" name="name" placeholder="name" ng-model="name" required>
+               <p class="error-msg" ng-show="infoCustomer.name.$touched && infoCustomer.name.$invalid">The name is required.</p>
+               <p>Phone number*: </p><input type="text" name="phone" placeholder="phone" ng-model="phone" ng-pattern="phoneNumber" required>
+               <p class="error-msg" ng-show="infoCustomer.phone.$touched && infoCustomer.phone.$error.required">The phone is required.</p>
+               <span class="error-msg" ng-show="infoCustomer.phone.$error.pattern">Please enter a 10 digit number</span>
+               <p>Address*: </p><input type="text" name="address" placeholder="address" ng-model="address" required>
+               <p class="error-msg" ng-show="infoCustomer.address.$touched && infoCustomer.address.$invalid">The address is required.</p>
+               <table>
+                  <tr>
+                     <th>From:</th>
+                     <th>To*:</th>
+                  </tr>
+                  <tr>
+                     <td>
+                        <input type="date" name="from" id="from" ng-model="from">
+                        <input type="time" name="timeReceiver">
+                     </td>
+                     <td>
+                        <input type="date" name="to" id="to" ng-model="to" ng-required="true">
+                        <input type="time" name="timeDelivery">
+                     </td>
+                  </tr>
+               </table>               
+               
+            </form>
+            <span>{{calculateTotalDay()}}</span>
+            <table ng-repeat="i in cartLine" class="myCart">
+               <tr>
+                  <th></th>
+                  <th>Car</th>
+                  <th>Price/Day</th>
+                  <th>Numbers of Days</th>
+               </tr>
                <tr>
                   <td class="col1"><img src="{{i.link}}" class="imageLine"></td>
-                  <td class="row1 col2">{{i.name}}</td>
+                  <td class="row1 col2"><b>{{i.name}}</b></td>
                   <td class="row1 col3">{{i.price}}$</td>
-                  <td class="row1 col4"><input type="text" ng-model="quantity" ></td>
-                 
+                  <td class="row1 col4">
+                     <!-- <input type="text" ng-model="quantity" > -->
+                     <span>{{quantity}}</span>
+                  </td>
+                  <td class="row1 col5"><span ng-click="deleleLine(i)" ><img src="../static/images/icon/delete.png" class="deleteRow"></span></td>
                </tr>
                <tr>
-                  <td>Total: <span>{{gettotal(quantity, i)}} {{i.kq}}</span></td>
+                  <td><span>{{gettotal(quantity, i)}}</span></td>
                </tr>
             </table>
-            <p>Total: <span> {{total()}}</span></p>
-            <p>Information</p>
-            <form class="info-customer">
-               <p>Full name: </p><input type="text" name="name" placeholder="name">
-               <p>Phone number: </p><input type="text" name="phone" placeholder="phone">
-               <p>Address: </p><input type="text" name="address" placeholder="address">
-               <input type="submit" name="submit" value="Send">
-            </form>
+            <p>Total: <span><b>{{total()}}$</b></span></p>
+            <input type="submit" name="submit" value="Order" ng-click="order()">
+            <br>
             <a href="#">Continue buying</a>
          </div>
-
-
          <div class="clear-fix"></div>
          <div>
             <div ng-include="'footer.html'"></div>

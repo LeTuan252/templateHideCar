@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
    <head>
       <meta charset="UTF-8">
-      <title>Hide Super Car</title>
+      <title>Hire Super Car</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="stylesheet" type="text/css" href="../static/css/style2.css" />
       <link rel="stylesheet" type="text/css" href="../static/css/index.css" />
       <script type="text/javascript" src="../static/js/jquery-3.3.1.min.js" ></script>
       <script type="text/javascript" src="../static/js/index.js" ></script> 
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+      <script type="text/javascript" src="../static/js/angular.min.js" ></script>
       <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.min.css" />
       <link rel="stylesheet" type="text/css" href="../static/css/popup.css" />
-      <!-- <script type="text/javascript" src="../static/js/angular.min.js"></script> -->
       <script type="text/javascript" src="../static/bootstrap/js/bootstrap.min.js" ></script>
       <script type="text/javascript" src="../static/js/ui-bootstrap-tpls-2.5.0.min.js"></script>
    </head>
@@ -19,107 +19,105 @@
       <div ng-include="'_menu.html'"></div>
       <div class="body">
          <popup-modal ng-show="showPopupModal" show-popup-modal="showPopupModal" item-car="selectedItem"></popup-modal>
-         <div class="slide-container">
-            
-         	<img th:src="@{/images/banner1.jpg}" src="../static/images/banner1.jpg" stt="0" class="image1 slide-image" />
-            <img th:src="@{/images/banner2.jpg}" src="../static/images/banner2.jpg" stt="1" class="image2 slide-image" />
-            <img th:src="@{/images/banner3.jpg}" src="../static/images/banner3.jpg" stt="2" class="image3 slide-image" />
-            <div id ="next"><img src="../static/images/icon/arrow-right.png" class="arrow"></div>
-            <div id = "prev"><img src="../static/images/icon/arrow-left.png" class="arrow"></div>
-            <ul class="dot-box">
-              <li class="dot active" ></li> 
-              <li class="dot" ></li> 
-              <li class="dot" ></li>
-            </ul> 
-            
+         <div id="bannerCarousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+               <li data-target="#bannerCarousel" data-slide-to="0" class="active"></li>
+               <li data-target="#bannerCarousel" data-slide-to="1"></li>
+               <li data-target="#bannerCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+               <div class="carousel-item active">
+                  <img src="../static/images/banner1.jpg" class="d-block w-80" />
+               </div>
+               <div class="carousel-item">
+                  <img src="../static/images/banner2.jpg" class="d-block w-80" />
+               </div>
+               <div class="carousel-item">
+                  <img src="../static/images/banner3.jpg" class="d-block w-80" />
+               </div>
+            </div>
+
+            <a class="carousel-control-prev" href="#bannerCarousel" role="button" data-slide="prev">
+               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+               <span class="sr-only">Prev</span>
+            </a>
+
+            <a href="#bannerCarousel" class="carousel-control-next" role="button" data-slide="next">
+               <span class="carousel-control-next-icon" aria-hidden="true"></span>
+               <span class="sr-only">Next</span>
+            </a>
          </div>
          <div class="clear-fix"></div>
          <div class="col-md-4 col-sm-4 car">    
-            <p>Search Car</p>
+            <p>Find Car</p>
             <div class="search-car">
-                <input type="text" name="carName" placeholder="Name" />
+               <input type="text" name="carName" placeholder="Name" ng-model="carName" />
                <div class="select">
-                  <select>
-                     <option>Label</option>
-                     <option>BMW</option>
-                     <option>Lexus</option>
-                     <option>Roll Royce</option>
+               Label:
+                  <select ng-model="label" ng-options="seat.value as seat.label for seat in chooseLabel">
                   </select>
                </div>
                <div class="select">
-                  <select>
-                     <option>Seats</option>
+               Seat:
+                  <select ng-model="seat" ng-options="seat.value as seat.label for seat in chooseSeat">
+                  
+                     <!-- <option>Seats</option>
                      <option>4 seats</option>
                      <option>7 seats</option>
                      <option>16 seats</option>
-                     <option>24 seats</option>
+                     <option>24 seats</option> -->
                   </select>
                </div>
                <div class="select">
-                  <select>
-                     <option>Color</option>
+               Color:
+                  <select ng-model="color" ng-options="color.value as color.label for color in chooseColor">
+                    <!--  <option>Color</option>
                      <option>Black</option>
                      <option>White</option>
                      <option>Red</option>
-                     <option>Other</option>
+                     <option>Other</option> -->
                   </select>
                </div>
-               
-               <input type="submit" name="Send" value="Search">
+               <div>
+                  Price:
+                  <p class="priceFrom">
+                    From: <input type="number" name="priceFrom" ng-model="priceFrom">
+                  </p>
+                  <p class="priceTo">  
+                    To: <input type="number" name="priceTo" ng-model="priceTo">
+                  </p>
+               </div>
+               <input type="submit" name="Send" value="Search" ng-click="search()">
             </div>
+            
          </div>
-         <div class="col-md-8 col-sm-8 col-12 car">
+         <div class="col-md-8 col-sm-8 col-12">
             <div class="groupCar">Lamborghini</div>
-            <div class="col-md-6 col-sm-6 col-6 car">
-               <div class="one-car" ng-repeat="i in superCar.superCar1" >
-                  <img  src="{{i.link}}"  ng-click="open(i)" />
+            <div class="one-car col-md- col-sm-6 col-6" ng-repeat="i in superCar | limitTo : 4" >
+               <div class="border">
+                  <img  src="{{i.image}}"  ng-click="open(i)" />
                   <ul>
                      <li><span>{{i.name}}</span></li>
-                     <li><span>{{i.price}}$</span></li>
-                     
+                     <li><span>{{i.price}}$/day</span></li> 
                   </ul>
                   <span ng-click="open(i)" class="detail-car"><i>Details ... </i> </span>
                   <div class="clear-fix"></div>
-               </div> 
+               </div>
             </div>
-            <div class="col-md-6 col-sm-6 col-6 car">
-               <div class="one-car" ng-repeat="i in superCar.superCar2" >
-                  <img  src="{{i.link}}"  ng-click="open(i)" />
-                  <ul>
-                     <li><span>{{i.name}}</span></li>
-                     <li><span>{{i.price}}$</span></li>
-                  </ul>
-                  <span ng-click="open(i)" class="detail-car"><i>Details ... </i> </span>
-                  <div class="clear-fix"></div>
-               </div> 
-            </div>
-
+            <div class="clear-fix"></div>
             <div class="groupCar">Toyota</div>  
-            <div class="col-md-6 col-sm-6 col-6 car">
-               <div class="one-car" ng-repeat="i in weddingCar.weddingCar1" >
-                  <img  src="{{i.link}}"  ng-click="open(i)" />
+            <div class="one-car col-md-6 col-sm-6 col-6 " ng-repeat="i in superCar | limitTo : 4 : 5" >
+               <div class="border">
+                  <img  src="{{i.image}}"  ng-click="open(i)" />
                   <ul>
                      <li><span>{{i.name}}</span></li>
-                     <li><span>{{i.price}}$</span></li>
+                     <li><span>{{i.price}}$/day</span></li>
                   </ul>
                   <span ng-click="open(i)" class="detail-car"><i>Details ... </i> </span>
                   <div class="clear-fix"></div>
-               </div> 
-            </div>
-            <div class="col-md-6 col-sm-6 col-6 car">
-               <div class="one-car" ng-repeat="i in weddingCar.weddingCar2" >
-                  <img  src="{{i.link}}"  ng-click="open(i)" />
-                  <ul>
-                     <li><span>{{i.name}}</span></li>
-                     <li><span>{{i.price}}$</span></li>
-                  </ul>
-                  <span ng-click="open(i)" class="detail-car"><i>Details ... </i> </span>
-                  <div class="clear-fix"></div>
-               </div> 
-            </div>
+               </div>
+            </div> 
          </div>   
-         
-
          <div class="clear-fix" ></div>
 
          <div ng-include="'footer.html'"></div>

@@ -1,0 +1,19 @@
+<input class="uploadImage" type="file" name="file"/>
+<div class="dropzone">
+	<p class="msg">Click or Drop files to upload</p>
+</div>
+<div class="preview clearfix">
+		<div class="previewData clearfix" ng-repeat="data in previewData track by $index">
+			<img src={{data.src}}></img>
+			<div class="previewDetails">
+				<div class="detail"><b>Name : </b>{{data.name}}</div>
+				<div class="detail"><b>Type : </b>{{data.type}}</div>
+				<div class="detail"><b>Size : </b> {{data.size}}</div>
+			</div>
+			<div class="previewControls">
+				<span ng-click="remove(data)" class="remove">
+					<i> Remove </i>
+				</span>
+			</div>
+		</div>	
+</div>
